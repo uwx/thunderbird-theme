@@ -1,0 +1,152 @@
+/*don't uncomment this: @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");*/
+
+@import 'thunderbird-monterail/userChrome.css';
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin-ext');
+
+#folderTree > treechildren::-moz-tree-row { /*selector needs to be this for priority*/
+	margin-top: 0 !important;
+    border-radius: 0 !important;
+}
+#folderTree > treechildren::-moz-tree-row(hover) {
+    border: none;
+    background-color: white !important;
+}
+#folderTree > treechildren::-moz-tree-cell-text(hover) {
+    color: black !important;
+}
+/*slightly more friendly color for unread folders*/
+/*from omni.ja\chrome\classic\skin\classic\messenger\folderPane.css*/
+#folderTree > treechildren::-moz-tree-cell-text(folderNameCol, isServer-true, biffState-NewMail),
+#folderTree > treechildren::-moz-tree-cell-text(folderNameCol, newMessages-true),
+#folderTree > treechildren::-moz-tree-cell-text(folderNameCol, specialFolder-Inbox, newMessages-true) {
+    color: var(--hansen-unread) !important;
+}
+#folderTree > treechildren::-moz-tree-cell-text(hover, folderNameCol, isServer-true, biffState-NewMail),
+#folderTree > treechildren::-moz-tree-cell-text(hover, folderNameCol, newMessages-true),
+#folderTree > treechildren::-moz-tree-cell-text(hover, folderNameCol, specialFolder-Inbox, newMessages-true) {
+    color: var(--hansen-unread-hover) !important;
+}
+
+/*remove padding/margin from both email list and email list header*/
+#threadCols {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+#threadTree treechildren {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+#threadTree treechildren::-moz-tree-cell-text {
+    font-size: 120% !important; /*email title size*/
+}
+#threadTree .tree-rows, #threadTree treechildren::-moz-tree-cell {
+    background: var(--hansen-bg);
+}
+
+#threadTree treechildren::-moz-tree-cell-text {
+    color: white !important;
+}
+#threadTree treechildren::-moz-tree-cell(selected) {
+    background: var(--highlight-color);
+}
+
+#threadTree treechildren::-moz-tree-row {
+	border-bottom: 1px solid rgba(0,0,0,0.7) !important;
+}
+#threadTree treechildren::-moz-tree-row(selected) {
+	border-bottom: 1px solid rgba(0,0,0,0.3) !important;
+}
+
+/*invert column headers, then invert the sort direction icon to get it back*/
+#threadCols, .treecol-sortdirection {
+    filter: invert(100%);
+}
+.tree-scrollable-columns {
+    font-size: 120%;
+    font-weight: 600;
+}
+
+#subjectCol>label, #correspondentCol>label, #dateCol>label {
+    padding-left: 12px !important;
+}
+
+/*fixes theme fucking with scrollbar dimensions*/
+scrollbar {
+    margin-right: 0 !important;
+}
+
+:root {
+    --hansen-text: white;
+    --hansen-bg: rgb(50,50,52);
+    --hansen-unread: #81daea;
+    --hansen-unread-hover: #007a8e;
+    --hansen-select: #555;
+    
+	--system-font: initial;
+    --default-font: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+	--folder-tree-appearance: none;
+    --headers-background-color: var(--hansen-bg);
+    --headers-text-color: var(--hansen-text);
+    --highlight-color: var(--hansen-select);
+}
+
+
+/*
+ * threadTree icons
+ */
+
+/* ..... thread column (1st) ..... */
+#threadTree treechildren::-moz-tree-image(threadCol) { list-style-image: url("thunderbird-monterail/icons/message-list/thread-light.svg") !important; }
+
+/* ..... twisty ..... */
+#threadTree treechildren:-moz-tree-twisty {	list-style-image: url("thunderbird-monterail/icons/folder-pane/twisty-light.svg") !important; }
+#threadTree treechildren:-moz-tree-twisty(open) { list-style-image: url("thunderbird-monterail/icons/folder-pane/twisty-expanded-light.svg") !important; }
+
+/* ..... read column ..... */
+#threadTree treechildren::-moz-tree-image(unreadButtonColHeader) { list-style-image: url("thunderbird-monterail/icons/message-list/dot-unread.svg") !important; }
+#threadTree treechildren::-moz-tree-image(unreadButtonColHeader, unread) { list-style-image: url("thunderbird-monterail/icons/message-list/dot-read.svg") !important; }
+/* Unread and read are reversed for dark themes */
+
+/*
+ * folderTree hover icons
+ */
+
+/* ..... twisty ..... */
+#folderTree treechildren:-moz-tree-twisty(hover) {	list-style-image: url("thunderbird-monterail/icons/folder-pane/twisty-dark.svg") !important; }
+#folderTree treechildren:-moz-tree-twisty(hover, open) { list-style-image: url("thunderbird-monterail/icons/folder-pane/twisty-expanded-dark.svg") !important; }
+
+/* ::::: Folder icons for menus   ::::: */
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol) { list-style-image: url("thunderbird-monterail/icons/folder-pane/folder.svg") !important; } /* Folders */
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, serverType-nntp) { list-style-image: url("thunderbird-monterail/icons/folder-pane/news-dark.svg") !important; } /* Newsgroup */
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, isFeedFolder-true) { list-style-image: url("thunderbird-monterail/icons/folder-pane/rss.svg") !important; } /* Feed */
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, specialFolder-Inbox) { list-style-image: url("thunderbird-monterail/icons/folder-pane/inbox-dark.svg") !important; }
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, specialFolder-Sent) { list-style-image: url("thunderbird-monterail/icons/folder-pane/sent.svg") !important; }
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, specialFolder-Outbox) { list-style-image: url("thunderbird-monterail/icons/folder-pane/outbox-dark.svg") !important; }
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, specialFolder-Drafts) { list-style-image: url("thunderbird-monterail/icons/folder-pane/drafts.svg") !important; }
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, specialFolder-Templates) { list-style-image: url("thunderbird-monterail/icons/folder-pane/template-dark.svg") !important; }
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, specialFolder-Junk) { list-style-image: url("thunderbird-monterail/icons/folder-pane/flame-junk.svg") !important; }
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, specialFolder-Trash) { list-style-image: url("thunderbird-monterail/icons/folder-pane/trash.svg") !important; }
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, specialFolder-Archive) { list-style-image: url("thunderbird-monterail/icons/folder-pane/archive.svg") !important; }
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, specialFolder-Virtual) { list-style-image: url("thunderbird-monterail/icons/folder-pane/folder-search.svg") !important; }
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, isServer-true) { list-style-image: url("thunderbird-monterail/icons/folder-pane/email-account-dark.svg") !important; } /* IMAP/POP/movemail account nodes */
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, isServer-true, serverType-none) { list-style-image: url("thunderbird-monterail/icons/folder-pane/local-account-dark.svg") !important; } /* Local folders account node */
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, isServer-true, serverType-nntp) { list-style-image: url("thunderbird-monterail/icons/folder-pane/news-dark.svg") !important; } /* News server */
+
+#folderTree treechildren::-moz-tree-image(hover, folderNameCol, isServer-true, serverType-rss) { list-style-image: url("thunderbird-monterail/icons/folder-pane/news-dark.svg") !important; } /* Feed account node */

@@ -1,0 +1,3 @@
+[submodule "thunderbird-monterail"]
+	path = thunderbird-monterail
+	url = https://github.com/spymastermatt/thunderbird-monterail.git
